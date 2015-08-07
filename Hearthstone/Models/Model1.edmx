@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HearthStoneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cards">
+          <Key>
+            <PropertyRef Name="guid" />
+          </Key>
+          <Property Name="guid" Type="char" MaxLength="36" Nullable="false" />
+          <Property Name="id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="local" Type="nvarchar" MaxLength="50" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" />
+          <Property Name="faction" Type="nvarchar" MaxLength="50" />
+          <Property Name="rarity" Type="nvarchar" MaxLength="50" />
+          <Property Name="cost" Type="int" />
+          <Property Name="race" Type="nvarchar" MaxLength="50" />
+          <Property Name="playerClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="text" Type="nvarchar" MaxLength="100" />
+          <Property Name="inPlayText" Type="nvarchar" MaxLength="50" />
+          <Property Name="mechanics" Type="nvarchar" MaxLength="50" />
+          <Property Name="flavor" Type="nvarchar" MaxLength="100" />
+          <Property Name="artist" Type="nvarchar" MaxLength="50" />
+          <Property Name="attack" Type="int" />
+          <Property Name="health" Type="int" />
+          <Property Name="collectible" Type="bit" />
+          <Property Name="elite" Type="nvarchar" MaxLength="50" />
+          <Property Name="howToGet" Type="nvarchar" MaxLength="50" />
+          <Property Name="howToGetGold" Type="nvarchar" MaxLength="50" />
+          <Property Name="img" Type="nvarchar" MaxLength="50" />
+          <Property Name="imgGold" Type="nvarchar" MaxLength="50" />
+          <Property Name="set" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="HearthStoneModelStoreContainer">
+          <EntitySet Name="Cards" EntityType="Self.Cards" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HearthStoneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cards">
+          <Key>
+            <PropertyRef Name="guid" />
+          </Key>
+          <Property Name="guid" Type="String" MaxLength="36" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="local" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="faction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="rarity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cost" Type="Int32" />
+          <Property Name="race" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="playerClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="text" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="inPlayText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mechanics" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="flavor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="artist" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="attack" Type="Int32" />
+          <Property Name="health" Type="Int32" />
+          <Property Name="collectible" Type="Boolean" />
+          <Property Name="elite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="howToGet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="howToGetGold" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="imgGold" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="set" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="HearthStoneEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cards" EntityType="Self.Cards" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HearthStoneModelStoreContainer" CdmEntityContainer="HearthStoneEntities">
+          <EntitySetMapping Name="Cards">
+            <EntityTypeMapping TypeName="HearthStoneModel.Cards">
+              <MappingFragment StoreEntitySet="Cards">
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="local" ColumnName="local" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="faction" ColumnName="faction" />
+                <ScalarProperty Name="rarity" ColumnName="rarity" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="race" ColumnName="race" />
+                <ScalarProperty Name="playerClass" ColumnName="playerClass" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="inPlayText" ColumnName="inPlayText" />
+                <ScalarProperty Name="mechanics" ColumnName="mechanics" />
+                <ScalarProperty Name="flavor" ColumnName="flavor" />
+                <ScalarProperty Name="artist" ColumnName="artist" />
+                <ScalarProperty Name="attack" ColumnName="attack" />
+                <ScalarProperty Name="health" ColumnName="health" />
+                <ScalarProperty Name="collectible" ColumnName="collectible" />
+                <ScalarProperty Name="elite" ColumnName="elite" />
+                <ScalarProperty Name="howToGet" ColumnName="howToGet" />
+                <ScalarProperty Name="howToGetGold" ColumnName="howToGetGold" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="imgGold" ColumnName="imgGold" />
+                <ScalarProperty Name="set" ColumnName="set" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
