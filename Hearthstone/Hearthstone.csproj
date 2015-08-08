@@ -153,6 +153,12 @@
     <Content Include="Content\Images\2015-08-08_105140.jpg" />
     <Content Include="Content\Images\2015-08-08_105359.jpg" />
     <Content Include="Content\Images\2015-08-08_105958.jpg" />
+    <Content Include="Content\Images\icon_classic.png" />
+    <Content Include="Content\Images\icon_s_brm.png" />
+    <Content Include="Content\Images\icon_s_classic.png" />
+    <Content Include="Content\Images\icon_s_naxx.png" />
+    <Content Include="Content\Images\icon-s-gvg.png" />
+    <Content Include="Content\Images\loading.gif" />
     <Content Include="Content\wowhead.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

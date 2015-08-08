@@ -12,6 +12,43 @@
     <link href="~/Content/basic.css" rel="stylesheet" />
     <link href="~/Content/wowhead.css" rel="stylesheet" />
     <script src="~/Scripts/UI/database.js"></script>
+
+    <script>
+        //設定tooltip彈出圖片
+        $(document).on("mouseenter", ".listview-mode-default > tbody > tr > td > .iconmedium > a", function () {
+            var a = $(this).data("id"),
+                b = $(this).offset(),
+                c = $(this).width();
+            SetToolTip(a, b, c);
+        });
+        $(document).on("mouseenter", ".listview-mode-default > tbody > tr > td > #title > a", function () {
+            var a = $(this).data("id"),
+                b = $(this).offset(),
+                c = $(this).width();
+            SetToolTip(a, b, c);
+        });
+
+        $(document).on("mouseleave", ".listview-mode-default > tbody > tr > td > .iconmedium > a", function () {
+            $(".hs-tooltip").hide()
+        })
+        $(document).on("mouseleave", ".listview-mode-default > tbody > tr > td > #title > a", function () {
+            $(".hs-tooltip").hide()
+        })
+
+        function SetToolTip(a,b,c) {
+            $(".hs-tooltip").css({
+                top: b.top,
+                left: b.left + c + 5
+            }).css("visibility","visible");
+
+            $(".hs-tooltip .hearthhead-tooltip-image").attr("src", "http://wow.zamimg.com/images/hearthstone/cards/enus/original/" + a + ".png")
+            $(".hs-tooltip").css({
+                top: b.top - $(window).scrollTop() < $(".hs-tooltip").height() ? b.top : b.top - $(".hs-tooltip").height(),
+                left: b.left + c + 20
+            }),
+            $(".hs-tooltip").show()
+        }
+    </script>
 }
 
 
@@ -29,7 +66,7 @@
                     <div>卡片(英文) (@totalCount)</div><b>Gallery (@totalCount)</b>
                 </a>
             </li>
-           
+
         </ul>
     </div>
 </div>
@@ -85,7 +122,7 @@
             <div class="listview-note">&nbsp;</div>
         </div>
     </div>
-    <div id="tab-list" >
+    <div id="tab-list">
         <div class="listview-band-top">
             <div class="listview-nav listview-nav-nocontrols"><a href="javascript:;" data-visible="no">« First</a><a href="javascript:;" data-visible="no">‹ Previous</a><span><b>1</b> - <b>6</b> of <b>6</b></span><a href="javascript:;" data-visible="no">Next ›</a><a href="javascript:;" data-visible="no">Last »</a></div><span class="listview-quicksearch">
                 <em class="fa fa-search"></em><a href="javascript:;" style="display: none;"><span></span></a>
@@ -98,32 +135,33 @@
                 <thead>
                     <tr>
                         <th colspan="2" style="text-align: left;">
-                            <div><a><span class="sortasc"><span>Name</span></span></a></div>
+                            <div><a><span class="sortasc"><span>名稱</span></span></a></div>
                         </th>
                         <th>
-                            <div><a><span><span>Set</span></span></a></div>
+                            <div><a><span><span>職業</span></span></a></div>
                         </th>
                         <th>
-                            <div><a><span><span>Race</span></span></a></div>
+                            <div><a><span><span>魔力</span></span></a></div>
                         </th>
                         <th>
-                            <div><a><span><span>Class</span></span></a></div>
+                            <div><a><span><span>血量</span></span></a></div>
                         </th>
                         <th>
-                            <div><a><span><span>Cost</span></span></a></div>
+                            <div><a><span><span>攻擊</span></span></a></div>
                         </th>
                         <th>
-                            <div><a><span><span>Attack</span></span></a></div>
-                        </th>
-                        <th>
-                            <div><a><span><span>Health</span></span></a></div>
+                            <div><a><span><span>類型</span></span></a></div>
                         </th>
                         <th style="text-align: center;">
-                            <div><a><span><span>Type</span></span></a></div>
+                            <div><a><span><span>卡包</span></span></a></div>
                         </th>
-                        <th>
-                            <div><a><span><span>Popularity</span></span></a></div>
-                        </th>
+
+
+
+
+                        @*<th>
+                                <div><a><span><span>Popularity</span></span></a></div>
+                            </th>*@
                     </tr>
                 </thead>
                 <tbody class="clickable">
@@ -135,30 +173,36 @@
                                     <ins style="background-image: url(../../Content/Images/2015-08-08_105958.jpg);"></ins>
                                     <del></del>
                                     @* TODO Detail *@
-                                    <a href="http://www.hearthhead.com/card=811/cult-master"></a>
+                                    <a data-id="@Model[i].id" href="http://www.hearthhead.com/card=811/cult-master"></a>
                                 </div>
                             </td>
                             <td style="text-align: left; border-left-style: none;">
-                                <div>
-                                    <a href="http://www.hearthhead.com/card=811/cult-master" class="@CustomerHelper.SetTitleColor(Model[i].rarity) listview-cleartext">@Model[i].name</a>
+                                <div id="title">
+                                    <a data-id="@Model[i].id" href="http://www.hearthhead.com/card=811/cult-master" class="@CustomerHelper.SetTitleColor(Model[i].rarity) listview-cleartext">@Model[i].name</a>
                                     <div class="listview-blurb small">@Html.Raw(Model[i].text)</div>
                                 </div>
                             </td>
-                            <td><span class="icon-hsset-small" title="Classic Set" style="background: url(http://wow.zamimg.com/images/hearthhead/icons/sets/classic/24.png);"></span></td>
-                            <td class="small q1" style="white-space: nowrap;"><a href="/cards?filter=ra=17">@CustomerHelper.SetRace(Model[i].race)</a></td>
-                            <td class="small @CustomerHelper.SetPlayerClass(Model[i].playerClass)" style="white-space: nowrap;"><a href="/cards?filter=cl=11">@CustomerHelper.SetPlayerClassLang(Model[i].playerClass)</a></td>
-                            <td><span class="hearthstone-cost">@Model[i].cost</span></td>
-                            <td><span class="hearthstone-attack">@Model[i].attack</span></td>
-                            <td><span class="hearthstone-health">@Model[i].health</span></td>
-                            <td style="white-space: nowrap;">
-                                <a class="small q0" href="http://www.hearthhead.com/cards?filter=cs=3">@Model[i].set</a>
-                                <br><a class="small q1" href="http://www.hearthhead.com/cards=4">@Model[i].type</a>
+                            <td class="small @CustomerHelper.SetPlayerClass(Model[i].playerClass)" style="white-space: nowrap;">
+                                <a href="/cards?filter=cl=11">@CustomerHelper.SetPlayerClassLang(Model[i].playerClass)</a>
                             </td>
-                            <td>0</td>
+                            <td><span class="hearthstone-cost">@Model[i].cost</span></td>
+                            <td><span class="hearthstone-health">@Model[i].health</span></td>
+                            <td><span class="hearthstone-attack">@Model[i].attack</span></td>
+                            <td style="white-space: nowrap;">
+
+                                <a class="small q0" href="http://www.hearthhead.com/cards=4">@Model[i].type</a><br>
+                                <a class="small q1" href="/cards?filter=ra=17">@Model[i].race</a>
+                            </td>
+                            <td>
+                                <a class="small q0" href="http://www.hearthhead.com/cards?filter=cs=3">@Model[i].set</a>
+                                <span class="icon-hsset-tiny" title="Classic Set" style="background: url(../../Content/Images/icon_s_classic.png);"></span>
+                            </td>
+
+                            @*<td>0</td>*@
                         </tr>
                     }
 
-                  
+
                 </tbody>
             </table>
             <div class="listview-nodata text" style="display: none;"></div>
@@ -168,4 +212,23 @@
             <div class="listview-note">&nbsp;</div>
         </div>
     </div>
+</div>
+
+<div class="wowhead-tooltip hearthhead-tooltip-image hs-tooltip"
+     style="position: absolute; top: 122px; left: 33px; width: 200px; visibility: hidden; "
+     data-visible="no">
+    <p style="visibility: hidden; background-image: none;">
+        <div></div>
+    </p><table class="">
+        <tbody>
+            <tr>
+                <td>
+                    <img width="200" src="//wow.zamimg.com/images/hearthstone/cards/enus/medium/NEW1_037.png?9577" class="hearthhead-tooltip-image">
+                    <table><tbody><tr><td><span class="q"><i>He's currently trying to craft a "flail-axe", but all the other swordsmiths say it can't be done.</i></span></td><th style="background-position:right top"></th></tr><tr class="hearthhead-tooltip-inner"><th style="background-position:left bottom"></th><th style="background-position:right bottom"></th></tr></tbody></table>
+                </td>
+                <th style="background-position: 100% 0%;"></th>
+            </tr>
+            <tr><th style="background-position: 0% 100%;"></th><th style="background-position: 100% 100%;"></th></tr>
+        </tbody>
+    </table><div class="wowhead-tooltip-powered"></div>
 </div>
