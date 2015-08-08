@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("應用程式名稱", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("阿北的爐石充電站", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -32,8 +32,17 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 應用程式</p>
+        <footer copyright>
+            <div class="copyright">
+                <p>Copyright HearthCharge © 2015</p>
+                <p>
+                    Hearthstone assets used on this site are copyrighted and/or trademarked material of Blizzard Entertainment, Inc.
+                    This site is not affiliated with Blizzard Entertainment, Inc.
+                </p><p>
+                    The hearthstone card-images appearing on this site are hosted by hearthhead.com (Zam Network).
+                </p>
+            </div>
+           
         </footer>
     </div>
 

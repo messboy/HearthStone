@@ -22,7 +22,6 @@ namespace Hearthstone.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
             var data = db.GetCards();
 
 

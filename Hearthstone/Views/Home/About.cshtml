@@ -1,12 +1,226 @@
 ﻿@model List<Hearthstone.Models.Cards>
 @{
+    ViewBag.Message = "阿北的資料庫";
     ViewBag.Title = "About";
+    var totalCount = Model.Count;
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-@for (int i = 0; i < 300; i++)
-{
-    <img src="@Model[i].img" alt="" />
+@*@for (int i = 0; i < 300; i++)
+    {
+        <img src="@Model[i].img" alt="" />
 
+    }*@
+
+@section scripts{
+    <link href="~/Content/basic.css" rel="stylesheet" />
+    <link href="~/Content/wowhead.css" rel="stylesheet" />
+    <script src="~/Scripts/UI/database.js"></script>
 }
+
+
+
+<div id="jkbfksdbl4">
+    <div class="tabs-container">
+        <ul class="tabs">
+            <li>
+                <a href="#pic" class="">
+                    <div>卡片 (@totalCount)</div><b>Gallery (@totalCount)</b>
+                </a>
+            </li>
+            <li>
+                <a href="#list" class="">
+                    <div>清單 (@totalCount)</div><b>Text (@totalCount)</b>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="lv-hearthstonecards" class="listview">
+    <div id="tab-pic">
+        <div class="listview-band-top">
+            <div class="listview-nav listview-nav-nocontrols"><a href="javascript:;" data-visible="no">« First</a><a href="javascript:;" data-visible="no">‹ Previous</a><span><b>1</b> - <b>6</b> of <b>6</b></span><a href="javascript:;" data-visible="no">Next ›</a><a href="javascript:;" data-visible="no">Last »</a></div>
+            <div class="listview-note">
+                <div class="listview-sort-options">Sort by: <span class="listview-sort-options-choices"><a href="javascript:;" class="active sortasc">Name</a><a href="javascript:;">Race</a><a href="javascript:;">Class</a><a href="javascript:;">Cost</a><a href="javascript:;">Attack</a><a href="javascript:;">Health</a><a href="javascript:;">Durability</a><a href="javascript:;">Type</a><a href="javascript:;">Popularity</a></span></div>
+            </div>
+        </div>
+        <div class="listview-scroller">
+            <table class="listview-mode-tiled">
+                <colgroup>
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                </colgroup>
+                <thead></thead>
+                <tbody class="clickable">
+                    @for (int i = 0; i < totalCount; i = i + 5)
+                    {
+                        <tr>
+                            @{var count = i + 5;}
+                            @for (int j = i; j < count; j++)
+                            {
+                                if (j<Model.Count)
+                                {
+                                    <td align="center" valign="bottom" style="padding: 0px;">
+                                        <a href="http://www.hearthhead.com/card=811&text" data-disable-wowhead-touch-tooltip="true">
+                                        
+                                                <img src="@Model[j].img" style="display: block; width: 120%; max-width: 200px; margin: 0px -50px;">
+                                        
+                                        </a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="empty-cell"></td>
+                                }
+                            }
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <div class="listview-nodata text" style="display: none;"></div>
+        </div>
+        <div class="listview-band-bottom">
+            <div class="listview-nav listview-nav-nocontrols"><a href="javascript:;" data-visible="no">« First</a><a href="javascript:;" data-visible="no">‹ Previous</a><span><b>1</b> - <b>6</b> of <b>6</b></span><a href="javascript:;" data-visible="no">Next ›</a><a href="javascript:;" data-visible="no">Last »</a></div>
+            <div class="listview-note">&nbsp;</div>
+        </div>
+    </div>
+    <div id="tab-list" style="display: none;">
+        <div class="listview-band-top">
+            <div class="listview-nav listview-nav-nocontrols"><a href="javascript:;" data-visible="no">« First</a><a href="javascript:;" data-visible="no">‹ Previous</a><span><b>1</b> - <b>6</b> of <b>6</b></span><a href="javascript:;" data-visible="no">Next ›</a><a href="javascript:;" data-visible="no">Last »</a></div><span class="listview-quicksearch">
+                <em class="fa fa-search"></em><a href="javascript:;" style="display: none;"><span></span></a>
+                <input type="text" placeholder="Search within results..." style="width: 15em;">
+            </span>
+            <div class="listview-note">&nbsp;</div>
+        </div>
+        <div class="listview-scroller">
+            <table class="listview-mode-default">
+                <thead>
+                    <tr>
+                        <th colspan="2" style="text-align: left;">
+                            <div><a><span class="sortasc"><span>Name</span></span></a></div>
+                        </th>
+                        <th>
+                            <div><a><span><span>Set</span></span></a></div>
+                        </th>
+                        <th>
+                            <div><a><span><span>Race</span></span></a></div>
+                        </th>
+                        <th>
+                            <div><a><span><span>Class</span></span></a></div>
+                        </th>
+                        <th>
+                            <div><a><span><span>Cost</span></span></a></div>
+                        </th>
+                        <th>
+                            <div><a><span><span>Attack</span></span></a></div>
+                        </th>
+                        <th>
+                            <div><a><span><span>Health</span></span></a></div>
+                        </th>
+                        <th>
+                            <div><a><span><span>Type</span></span></a></div>
+                        </th>
+                        <th>
+                            <div><a><span><span>Popularity</span></span></a></div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="clickable">
+                    @for (int i = 0; i < @totalCount; i++)
+                    {
+                        <tr>
+                            <td style="width: 1px; padding-right: 0px; border-right-style: none;">
+                                <div class="iconmedium">
+                                    <ins style="background-image: url(../../Content/Images/2015-08-08_105958.jpg);"></ins>
+                                    <del></del>
+                                    <a href="http://www.hearthhead.com/card=811/cult-master"></a>
+                                </div>
+                            </td>
+                            <td style="text-align: left; border-left-style: none;">
+                                <div>
+                                    <a href="http://www.hearthhead.com/card=811/cult-master" class="q1 listview-cleartext">Cult Master</a>
+                                    <div class="listview-blurb small">Whenever one of your other minions dies, draw a card.</div>
+                                </div>
+                            </td>
+                            <td><span class="icon-hsset-small" title="Classic Set" style="background: url(http://wow.zamimg.com/images/hearthhead/icons/sets/classic/24.png);"></span></td>
+                            <td></td>
+                            <td></td>
+                            <td><span class="hearthstone-cost">4</span></td>
+                            <td><span class="hearthstone-attack">4</span></td>
+                            <td><span class="hearthstone-health">2</span></td>
+                            <td style="white-space: nowrap;">
+                                <a class="small q0" href="http://www.hearthhead.com/cards?filter=cs=3">Classic</a>
+                                <br><a class="small q1" href="http://www.hearthhead.com/cards=4">Minion</a>
+                            </td>
+                            <td>3100</td>
+                        </tr>
+                    }
+
+                   
+                    <tr>
+                        <td style="width: 1px; padding-right: 0px; border-right-style: none;">
+                            <div class="iconmedium">
+                                <ins style="background-image: url(http://wow.zamimg.com/images/wow/icons/medium/inv_misc_ticket_tarot_beasts_01.jpg);"></ins>
+                                <del></del>
+                                <a href="http://www.hearthhead.com/card=926/imp-master"></a>
+                            </div>
+                        </td>
+                        <td style="text-align: left; border-left-style: none;">
+                            <div>
+                                <a href="http://www.hearthhead.com/card=926/imp-master" class="q3 listview-cleartext">Imp Master</a>
+                                <div class="listview-blurb small">At the end of your turn, deal 1 damage to this minion and summon a 1/1 Imp.</div>
+                            </div>
+                        </td>
+                        <td><span class="icon-hsset-small" title="Classic Set" style="background: url(http://wow.zamimg.com/images/hearthhead/icons/sets/classic/24.png);"></span></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="hearthstone-cost">3</span></td>
+                        <td><span class="hearthstone-attack">1</span></td>
+                        <td><span class="hearthstone-health">5</span></td>
+                        <td style="white-space: nowrap;">
+                            <a class="small q0" href="http://www.hearthhead.com/cards?filter=cs=3">Classic</a>
+                            <br><a class="small q1" href="http://www.hearthhead.com/cards=4">Minion</a>
+                        </td>
+                        <td>2366</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 1px; padding-right: 0px; border-right-style: none;">
+                            <div class="iconmedium">
+                                <ins style="background-image: url(http://wow.zamimg.com/images/wow/icons/medium/inv_misc_ticket_tarot_beasts_01.jpg);"></ins>
+                                <del></del>
+                                <a href="http://www.hearthhead.com/card=1000093/master-jouster"></a>
+                            </div>
+                        </td>
+                        <td style="text-align: left; border-left-style: none;">
+                            <div>
+                                <a href="http://www.hearthhead.com/card=1000093/master-jouster" class="q3 listview-cleartext">Master Jouster</a>
+                                <div class="listview-blurb small">Battlecry: Reveal a minion in each deck. If yours costs more, gain Taunt and Divine Shield.</div>
+                            </div>
+                        </td>
+                        <td><span class="icon-hsset-small" title="The Grand Tournament Set" style="background: url(http://wow.zamimg.com/images/hearthhead/icons/sets/tgt/24.png);"></span></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="hearthstone-cost">6</span></td>
+                        <td><span class="hearthstone-attack">5</span></td>
+                        <td><span class="hearthstone-health">6</span></td>
+                        <td style="white-space: nowrap;">
+                            <a class="small q0" href="http://www.hearthhead.com/cards?filter=cs=15">The Grand Tournament</a>
+                            <br><a class="small q1" href="http://www.hearthhead.com/cards=4">Minion</a>
+                        </td>
+                        <td>5</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="listview-nodata text" style="display: none;"></div>
+        </div>
+        <div class="listview-band-bottom">
+            <div class="listview-nav listview-nav-nocontrols"><a href="javascript:;" data-visible="no">« First</a><a href="javascript:;" data-visible="no">‹ Previous</a><span><b>1</b> - <b>6</b> of <b>6</b></span><a href="javascript:;" data-visible="no">Next ›</a><a href="javascript:;" data-visible="no">Last »</a></div>
+            <div class="listview-note">&nbsp;</div>
+        </div>
+    </div>
+</div>
