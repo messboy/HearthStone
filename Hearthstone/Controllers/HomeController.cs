@@ -15,6 +15,7 @@ namespace Hearthstone.Controllers
     {
         CardDao db = new CardDao();
 
+
         public ActionResult Index()
         {
             return View();
@@ -22,9 +23,8 @@ namespace Hearthstone.Controllers
 
         public ActionResult About()
         {
+            
             var data = db.GetCards();
-
-
             return View(data);
         }
 
