@@ -28,6 +28,7 @@ namespace Hearthstone.Controllers
             return View(data);
         }
 
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
