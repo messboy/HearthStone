@@ -134,6 +134,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ConstantModel.cs" />
+    <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -166,7 +167,7 @@
     <Content Include="Content\Images\icon-s-gvg.png" />
     <Content Include="Content\Images\loading.gif" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="Content\wowhead.css" />
+    <Content Include="Content\website.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

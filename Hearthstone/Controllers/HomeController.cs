@@ -28,6 +28,12 @@ namespace Hearthstone.Controllers
             return View(data);
         }
 
+        [HttpPost]
+        public ActionResult About(FilterModel m)
+        {
+            var data = db.GetCards();
+            return View(data);
+        }
 
         public ActionResult Contact()
         {

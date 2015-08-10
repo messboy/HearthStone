@@ -1226,11 +1226,11 @@ a.button[disabled], span.button[disabled], .button a[disabled], button[disabled]
 }
 
 .btn-site, input[type="submit"], button[type="submit"], .listview-withselected input[type="button"] {
-    background-color: #a71a19 !important;
+    background-color: #0b4a16 !important;
 }
 
     .btn-site:hover, .btn-site:active, input[type="submit"]:hover, input[type="submit"]:active, button[type="submit"]:hover, button[type="submit"]:active, .listview-withselected input[type="button"]:hover, .listview-withselected input[type="button"]:active {
-        background-color: #b21c1a !important;
+        background-color: #8a9a22 !important;
     }
 
 .btn-zam {
