@@ -31,7 +31,8 @@ namespace Hearthstone.Controllers
         [HttpPost]
         public ActionResult About(FilterModel m)
         {
-            var data = db.GetCards();
+            var data = db.GetCards(m);
+            ViewBag.FilterInfo = m;
             return View(data);
         }
 
