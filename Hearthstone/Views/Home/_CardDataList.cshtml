@@ -1,0 +1,173 @@
+﻿@model List<Hearthstone.Models.Cards>
+@{
+    var totalCount = Model.Count;
+}
+<script src="~/Scripts/UI/database.js"></script>
+<div class="tabs-container">
+    <ul class="tabs">
+        <li>
+            <a href="#list" class="">
+                <div>清單 (@totalCount)</div><b>Text (@totalCount)</b>
+            </a>
+        </li>
+        <li>
+            <a href="#pic" class="">
+                <div>卡片(英文) (@totalCount)</div><b>Gallery (@totalCount)</b>
+            </a>
+        </li>
+
+    </ul>
+</div>
+@* 卡片列表(Ajax) *@
+<div id="lv-hearthstonecards" class="listview">
+    <div id="tab-pic" style="display: none;">
+        <div class="listview-band-top">
+            <div class="listview-nav listview-nav-nocontrols"><a href="javascript:;" data-visible="no">« First</a><a href="javascript:;" data-visible="no">‹ Previous</a><span><b>1</b> - <b>6</b> of <b>6</b></span><a href="javascript:;" data-visible="no">Next ›</a><a href="javascript:;" data-visible="no">Last »</a></div>
+            <div class="listview-note">
+                <div class="listview-sort-options">Sort by: <span class="listview-sort-options-choices"><a href="javascript:;" class="active sortasc">Name</a><a href="javascript:;">Race</a><a href="javascript:;">Class</a><a href="javascript:;">Cost</a><a href="javascript:;">Attack</a><a href="javascript:;">Health</a><a href="javascript:;">Durability</a><a href="javascript:;">Type</a><a href="javascript:;">Popularity</a></span></div>
+            </div>
+        </div>
+        <div class="listview-scroller">
+            <table class="listview-mode-tiled">
+                <colgroup>
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                </colgroup>
+                <thead></thead>
+                <tbody class="clickable">
+                    @for (int i = 0; i < totalCount; i = i + 5)
+                    {
+                        <tr>
+                            @{var count = i + 5;}
+                            @for (int j = i; j < count; j++)
+                            {
+                                if (j < Model.Count)
+                                {
+                                    <td align="center" valign="bottom" style="padding: 0px;">
+                                        <a href="http://www.hearthhead.com/card=811&text" data-disable-wowhead-touch-tooltip="true">
+
+                                            <img src="@Model[j].img" style="display: block; width: 120%; max-width: 200px; margin: 0px -50px;">
+
+                                        </a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="empty-cell"></td>
+                                }
+                            }
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <div class="listview-nodata text"></div>
+        </div>
+        <div class="listview-band-bottom">
+            <div class="listview-nav listview-nav-nocontrols"><a href="javascript:;" data-visible="no">« First</a><a href="javascript:;" data-visible="no">‹ Previous</a><span><b>1</b> - <b>6</b> of <b>6</b></span><a href="javascript:;" data-visible="no">Next ›</a><a href="javascript:;" data-visible="no">Last »</a></div>
+            <div class="listview-note">&nbsp;</div>
+        </div>
+    </div>
+    <div id="tab-list">
+        @*<div class="listview-band-top">
+                <div class="listview-nav listview-nav-nocontrols">
+                    <a class="act_first " href="javascript:;" data-visible="yes">«首頁 </a>
+                    <a class="act_previous" href="javascript:;" data-visible="yes">‹上一頁 </a>
+                    <a class="act_next " href="javascript:;" data-visible="yes"> 下一頁›</a>
+                    <a class="act_last " href="javascript:;" data-visible="yes"> 末頁»</a>
+                    <span class="page_info"></span>
+                </div><span class="listview-quicksearch">
+                    <em class="fa fa-search"></em><a href="javascript:;" style="display: none;"><span></span></a>
+                    <input type="text" placeholder="Search within results..." style="width: 15em;">
+                </span>
+                <div class="listview-note">&nbsp;</div>
+            </div>*@
+        <div class="listview-scroller">
+            <table class="listview-mode-default">
+                <thead>
+                    <tr>
+                        <th colspan="2" style="text-align: left;">
+                            <div><a><span class="sortasc"><span>名稱</span></span></a></div>
+                        </th>
+                        <th>
+                            <div><a><span><span>職業</span></span></a></div>
+                        </th>
+                        <th>
+                            <div><a><span><span>魔力</span></span></a></div>
+                        </th>
+                        <th>
+                            <div><a><span><span>血量</span></span></a></div>
+                        </th>
+                        <th>
+                            <div><a><span><span>攻擊</span></span></a></div>
+                        </th>
+                        <th>
+                            <div><a><span><span>類型</span></span></a></div>
+                        </th>
+                        <th style="text-align: center;">
+                            <div><a><span><span>卡包</span></span></a></div>
+                        </th>
+
+                        @*<th>
+                                <div><a><span><span>Popularity</span></span></a></div>
+                            </th>*@
+                    </tr>
+                </thead>
+                <tbody id="cardList" class="clickable">
+                    @for (int i = 0; i < @totalCount; i++)
+                    {
+                        <tr style="">
+                            <td style="width: 1px; padding-right: 0px; border-right-style: none;">
+                                <div class="iconmedium">
+                                    <ins style="background-image: url(../../Content/Images/2015-08-08_105958.jpg);"></ins>
+                                    <del></del>
+                                    @* TODO Detail *@
+                                    <a data-id="@Model[i].id" href="http://www.hearthhead.com/card=811/cult-master"></a>
+                                </div>
+                            </td>
+                            <td style="text-align: left; border-left-style: none;">
+                                <div id="title">
+                                    <a data-id="@Model[i].id" href="http://www.hearthhead.com/card=811/cult-master" class="@CustomerHelper.SetTitleColor(Model[i].rarity) listview-cleartext">@Model[i].name</a>
+                                    <div class="listview-blurb small">@Html.Raw(Model[i].text)</div>
+                                </div>
+                            </td>
+                            <td class="small @CustomerHelper.SetPlayerClass(Model[i].playerClass)" style="white-space: nowrap;">
+                                <a href="/cards?filter=cl=11">@CustomerHelper.SetPlayerClassLang(Model[i].playerClass)</a>
+                            </td>
+                            <td><span class="hearthstone-cost">@Model[i].cost</span></td>
+                            <td><span class="hearthstone-health">@Model[i].health</span></td>
+                            <td><span class="hearthstone-attack">@Model[i].attack</span></td>
+                            <td style="white-space: nowrap;">
+
+                                <a class="small q0" href="http://www.hearthhead.com/cards=4">@Model[i].type</a><br>
+                                <a class="small q1" href="/cards?filter=ra=17">@Model[i].race</a>
+                            </td>
+                            <td>
+                                <a class="small q0" href="http://www.hearthhead.com/cards?filter=cs=3">@Model[i].set</a>
+                                <span class="icon-hsset-tiny" title="Classic Set" style="background: url(../../Content/Images/icon_s_classic.png);"></span>
+                            </td>
+
+                            @*<td>0</td>*@
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+            <div class="listview-nodata text" style="display: none;"></div>
+        </div>
+        <div class="listview-band-bottom">
+            <div class="listview-nav listview-nav-nocontrols">
+                <a class="act_first" href="javascript:;" data-visible="yes">« 首頁</a>
+                <a class="act_previous" href="javascript:;" data-visible="yes">‹ 上一頁</a>
+                <a class="act_next" href="javascript:;" data-visible="yes">下一頁 ›</a>
+                <a class="act_last" href="javascript:;" data-visible="yes">末頁 »</a>
+                <span class="page_info"></span>
+            </div>
+            <div class="listview-note">&nbsp;</div>
+        </div>
+    </div>
+</div>

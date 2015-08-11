@@ -23,18 +23,18 @@ namespace Hearthstone.Controllers
 
         public ActionResult About()
         {
-            
-            var data = db.GetCards();
-            return View(data);
+            return View();
         }
 
+
         [HttpPost]
-        public ActionResult About(FilterModel m)
+        public PartialViewResult GetCardDataList(FilterModel m)
         {
             var data = db.GetCards(m);
-            ViewBag.FilterInfo = m;
-            return View(data);
-        }
+            ViewBag.data = data;
+
+            return PartialView("_CardDataList", data);
+        }  
 
         public ActionResult Contact()
         {

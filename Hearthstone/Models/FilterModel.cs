@@ -7,14 +7,19 @@ namespace Hearthstone.Models
 {
     public class FilterModel
     {
-        public List<string> Class { get; set; }
-        public List<string> Quality { get; set; }
-        public List<string> Type { get; set; }
-        public List<string> Set { get; set; }
-        public List<string> Attack { get; set; }
+        public string Class { get; set; }
+        public string Quality { get; set; }
+        public string Type { get; set; }
+        public string Set { get; set; }
+        public string Attack { get; set; }
 
-        public List<string> Health { get; set; }
-        public List<string> Cost { get; set; }
-        public List<string> Race { get; set; }
+        public string Health { get; set; }
+        public string Cost { get; set; }
+        public string Race { get; set; }
+
+        //TODO
+        public string Name { get; set; }
+
+        public string CardState { get; set; }   //當下是清單還是圖片
     }
 }

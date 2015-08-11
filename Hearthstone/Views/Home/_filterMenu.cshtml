@@ -2,7 +2,6 @@
 
 @* 改Ajax *@
 <div id="fi">
-    <form onreset="return fi_reset(this)" onsubmit="return fi_submit(this)" name="fi" method="post" action="/Home/About">
         <div class="filter-main">
             <fieldset class="right-side" data-bitmask-name="filter-class" data-bitmask="0">
                 <span class="delete-button" title="Clear" data-debug="0" style="display: none">×</span>
@@ -421,10 +420,9 @@
 
         <div class="filter-row">
             @Html.TextBox("CardName", "", new { @placeholder = "輸入卡片名稱" })
-            <input type="submit" value="～過濾卡片~">
-            <input type="submit" value="重設">
+            <input id="send_filter" type="button" value="～過濾卡片~">
+            <input type="button" value="重設">
         </div>
         <div class="clear"></div>
-    </form>
     <div class="pad"></div>
 </div>

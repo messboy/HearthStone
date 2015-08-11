@@ -37,51 +37,51 @@ namespace Hearthstone.Dal
                     var Cards = db.Cards.Where(c => c.collectible == true).Where(c => c.type != "Hero");
 
                     //職業
-                    if (filter.Class != null)
+                    if (!string.IsNullOrEmpty(filter.Class))
                     {
-                        var ary = filter.Class.ToArray();
+                        var ary = filter.Class.Split(',');
                         Cards = Cards.Where(c => ary.Contains(c.playerClass));
                     }
                     //Quality
-                    if (filter.Quality != null)
+                    if (!string.IsNullOrEmpty(filter.Quality))
                     {
-                        var ary = filter.Quality.ToArray();
+                        var ary = filter.Quality.Split(',');
                         Cards = Cards.Where(c => ary.Contains(c.rarity));
                     }
                     //Type
-                    if (filter.Type != null)
+                    if (!string.IsNullOrEmpty(filter.Type))
                     {
-                        var ary = filter.Type.ToArray();
+                        var ary = filter.Type.Split(',');
                         Cards = Cards.Where(c => ary.Contains(c.type));
                     }
                      //Set
-                    if (filter.Set != null)
+                    if (!string.IsNullOrEmpty(filter.Set))
                     {
-                        var ary = filter.Set.ToArray();
+                        var ary = filter.Set.Split(',');
                         Cards = Cards.Where(c => ary.Contains(c.set));
                     }
                      //Attack
-                    if (filter.Attack != null)
+                    if (!string.IsNullOrEmpty(filter.Attack))
                     {
-                        var ary = filter.Attack.ToArray();
+                        var ary = filter.Attack.Split(',');
                         Cards = Cards.Where(c => ary.Contains(c.attack.ToString()));
                     }
                      //Health
-                    if (filter.Health != null)
+                    if (!string.IsNullOrEmpty(filter.Health))
                     {
-                        var ary = filter.Health.ToArray();
+                        var ary = filter.Health.Split(',');
                         Cards = Cards.Where(c => ary.Contains(c.health.ToString()));
                     }
                      //Cost
-                    if (filter.Cost != null)
+                    if (!string.IsNullOrEmpty(filter.Cost))
                     {
-                        var ary = filter.Cost.ToArray();
+                        var ary = filter.Cost.Split(',');
                         Cards = Cards.Where(c => ary.Contains(c.cost.ToString()));
                     }
                      //Race
-                    if (filter.Race != null)
+                    if (!string.IsNullOrEmpty(filter.Race))
                     {
-                        var ary = filter.Race.ToArray();
+                        var ary = filter.Race.Split(',');
                         Cards = Cards.Where(c => ary.Contains(c.race));
                     }
 
