@@ -36,6 +36,12 @@ namespace Hearthstone.Dal
                 {
                     var Cards = db.Cards.Where(c => c.collectible == true).Where(c => c.type != "Hero");
 
+                    //CardName
+                    if (!string.IsNullOrEmpty(filter.Name))
+                    {
+                        Cards = Cards.Where(c => c.name == filter.Name);
+                    }
+
                     //職業
                     if (!string.IsNullOrEmpty(filter.Class))
                     {

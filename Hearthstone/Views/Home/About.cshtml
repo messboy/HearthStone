@@ -17,6 +17,8 @@
         //初始化
         $("#SearchFormAjax").submit();
 
+
+
         $("#send_filter").click(function () {
             //set filter param
             var c = $("[type=checkbox][name=Class]:checked").map(function () { return this.value; }).get().join();
@@ -27,6 +29,7 @@
             var co = $("[type=checkbox][name=Cost]:checked").map(function () { return this.value; }).get().join();
             var h = $("[type=checkbox][name=Health]:checked").map(function () { return this.value; }).get().join();
             var a = $("[type=checkbox][name=Attack]:checked").map(function () { return this.value; }).get().join();
+            var n = $("#CardName").val();
 
             $("#Class").val(c)
             $("#Quality").val(q)
@@ -36,7 +39,7 @@
             $("#Cost").val(co)
             $("#Health").val(h)
             $("#Attack").val(a)
-
+            $("#Name").val(n)
             //submit
             $("#SearchFormAjax").submit();
         });
@@ -75,7 +78,7 @@
     @Html.HiddenFor(model => model.Race)
     @Html.HiddenFor(model => model.Set)
     @Html.HiddenFor(model => model.Type)
-
+    @Html.HiddenFor(model => model.Name)
 }
 
 

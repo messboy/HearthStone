@@ -418,11 +418,15 @@
                 </div>
             </div>*@
 
-        <div class="filter-row">
-            @Html.TextBox("CardName", "", new { @placeholder = "輸入卡片名稱" })
-            <input id="send_filter" type="button" value="～過濾卡片~">
-            <input type="button" value="重設">
-        </div>
+        
         <div class="clear"></div>
     <div class="pad"></div>
 </div>
+<div class="row">
+    <div class=" col-md-12">
+        @Html.TextBox("CardName", "", new { @placeholder = "輸入卡片名稱" })
+        <input id="send_filter" type="button" value="過濾卡片">
+        @*<input type="button" value="重設">*@
+    </div>
+</div>
+<br />

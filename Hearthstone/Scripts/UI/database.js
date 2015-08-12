@@ -65,8 +65,8 @@ function SetToolTip(a, b, c) {
     $(".hs-tooltip").show()
 }
 
-    //Table 全部撈的 JS分頁製作
-    var pageSize = 30;    //每頁顯示的記錄條數
+//Table 全部撈的 JS分頁製作
+var pageSize = 30;    //每頁顯示的記錄條數
 var curPage = 0;        //當前頁
 var lastPage;        //最後頁
 var direct = 0;        //方向
@@ -108,6 +108,12 @@ function setPageInfo(curPage, page) {
     //document.getElementById("btn0").innerHTML = "當前 " + curPage + "/" + page + " 頁    每頁 ";    // 顯示當前多少頁
 
     //調整頁面選單
+    if (curPage == 1 && page == 1) {
+        $(".act_first").attr("data-visible", "no")
+        $(".act_previous").attr("data-visible", "no")
+        $(".act_next").attr("data-visible", "no")
+        $(".act_last").attr("data-visible", "no")
+    }else
     if (curPage == 1) {
         $(".act_first").attr("data-visible", "no")
         $(".act_previous").attr("data-visible", "no")
@@ -154,7 +160,7 @@ function displayPage() {
     end = begin + 1 * pageSize - 1;    // 末尾記錄號
 
     if (end > len) end = len;
-    $("#cardList tr").hide();    // 首先，設置這行為隱藏
+    $("#cardList tr").hide();    // 首先隱藏
     $("#cardList tr").each(function (i) {    // 然後，通過條件判斷決定本行是否恢復顯示
         if ((i >= begin && i <= end))//顯示begin<=x<=end的記錄
             $(this).show();
@@ -162,3 +168,21 @@ function displayPage() {
 
     setPageInfo(curPage, page);
 }
+
+//排序
+$('th').click(function () {
+    var table = $(this).parents('table').eq(0)
+    var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()+1))
+    this.asc = !this.asc
+    if (!this.asc) { rows = rows.reverse() }
+    for (var i = 0; i < rows.length; i++) { table.append(rows[i]) }
+
+    displayPage();
+})
+function comparer(index) {
+    return function (a, b) {
+        var valA = getCellValue(a, index), valB = getCellValue(b, index)
+        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB)
+    }
+}
+function getCellValue(row, index) { return $(row).children('td').eq(index).html() }
