@@ -47,7 +47,8 @@
                                 if (j < Model.Count)
                                 {
                                     <td align="center" valign="bottom" style="padding: 0px;">
-                                        <a href="http://www.hearthhead.com/card=811&text" data-disable-wowhead-touch-tooltip="true">
+                                        <a data-id="@Model[j].id" data-name="@Model[j].name" data-text="@Model[j].text"
+                                           href="http://www.hearthhead.com/card=811&text" data-disable-wowhead-touch-tooltip="true">
 
                                             <img src="@Model[j].img" style="display: block; width: 120%; max-width: 200px; margin: 0px -50px;">
 

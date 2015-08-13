@@ -30,26 +30,32 @@
 });
 
 
-    //設定tooltip彈出圖片
-    $(document).on("mouseenter", ".listview-mode-default > tbody > tr > td > .iconmedium > a", function () {
-        var a = $(this).data("id"),
-            b = $(this).offset(),
-            c = $(this).width();
-        SetToolTip(a, b, c);
-    });
-$(document).on("mouseenter", ".listview-mode-default > tbody > tr > td > #title > a", function () {
+//設定tooltip彈出圖片 - 
+$(document).on("mouseenter", ".listview-mode-default > tbody > tr > td > .iconmedium > a, .listview-mode-default > tbody > tr > td > #title > a", function () {
     var a = $(this).data("id"),
         b = $(this).offset(),
         c = $(this).width();
     SetToolTip(a, b, c);
 });
 
-$(document).on("mouseleave", ".listview-mode-default > tbody > tr > td > .iconmedium > a", function () {
+
+$(document).on("mouseleave", ".listview-mode-default > tbody > tr > td > .iconmedium > a, .listview-mode-default > tbody > tr > td > #title > a", function () {
     $(".hs-tooltip").hide()
 })
-$(document).on("mouseleave", ".listview-mode-default > tbody > tr > td > #title > a", function () {
+
+//設定tooltip彈出文字 - 
+$(document).on("mouseenter", ".listview-mode-tiled > tbody > tr > td > a", function () {
+    var a = [$(this).data("id"), $(this).data("name"), $(this).data("text")],
+        b = $(this).offset(),
+        c = $(this).width();
+    SetToolTipForImg(a, b, c);
+});
+
+
+$(document).on("mouseleave", ".listview-mode-tiled > tbody > tr > td > a", function () {
     $(".hs-tooltip").hide()
 })
+
 
 function SetToolTip(a, b, c) {
     $(".hs-tooltip").css({
@@ -57,12 +63,35 @@ function SetToolTip(a, b, c) {
         left: b.left + c + 5
     }).css("visibility", "visible");
 
+    $(".hs-tooltip .hearthhead-tooltip-image").show();
+    $(".hs-tooltip .tooltip-table").hide();
+
     $(".hs-tooltip .hearthhead-tooltip-image").attr("src", "http://wow.zamimg.com/images/hearthstone/cards/enus/original/" + a + ".png")
     $(".hs-tooltip").css({
         top: b.top - $(window).scrollTop() < $(".hs-tooltip").height() ? b.top : b.top - $(".hs-tooltip").height(),
         left: b.left + c + 20
     }),
     $(".hs-tooltip").show()
+}
+
+function SetToolTipForImg(a, b, c) {
+    $(".hs-tooltip").css({
+        top: b.top,
+        left: b.left + c + 5
+    }).css("visibility", "visible");
+
+    $(".hs-tooltip .hearthhead-tooltip-image").hide();
+    $(".hs-tooltip .tooltip-table").show();
+    $(".hs-tooltip").css({
+        top: b.top - $(window).scrollTop() < $(".hs-tooltip").height() ? b.top : b.top - $(".hs-tooltip").height() +270,
+        left: b.left + c + 20
+    }),
+
+    $(".tooltip-table td").html("<span class='q'>" + a[1] + "</span><br/><span class='q1'>" + a[2] + "</span>")
+
+    $(".hs-tooltip").show()
+
+     
 }
 
 //Table 全部撈的 JS分頁製作
