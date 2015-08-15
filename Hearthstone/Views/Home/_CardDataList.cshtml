@@ -3,6 +3,121 @@
     var totalCount = Model.Count;
 }
 <script src="~/Scripts/UI/database.js"></script>
+
+@* 設定資料庫列表名稱顏色,依據稀有度 *@
+@helper SetTitleColor(string rarity)
+{
+    string result = string.Empty;
+    switch (rarity)
+    {
+        case "Free": result = "q0";
+            break;
+        case "Common": result = "q1";
+            break;
+        case "Rare": result = "q3";
+            break;
+        case "Epic": result = "q4";
+            break;
+        case "Legendary": result = "q5";
+            break;
+        default:
+            break;
+    }
+    @(result)
+
+}
+
+@* 設定資料庫列表種族 *@
+@helper SetRace(string race)
+{
+    string result = string.Empty;
+    switch (race)
+    {
+        case "Free": result = "q0";
+            break;
+        case "Common": result = "q1";
+            break;
+        case "Rare": result = "q3";
+            break;
+        case "Epic": result = "q4";
+            break;
+        case "Legendary": result = "q5";
+            break;
+        default:
+            break;
+    }
+    @(result)
+
+}
+
+@* 設定資料庫列表職業 *@
+@helper SetPlayerClass(string job)
+{
+    string result = string.Empty;
+    switch (job)
+    {
+        case "Shaman": result = "c7";
+            break;
+        case "Rogue": result = "c4";
+            break;
+        case "Paladin": result = "c2";
+            break;
+        case "Warlock": result = "c9";
+            break;
+        case "Dream": result = "q5";
+            break;
+        case "Hunter": result = "c3";
+            break;
+        case "Priest": result = "c5";
+            break;
+        case "Druid": result = "c11";
+            break;
+        case "Warrior": result = "c1";
+            break;
+        case "Mage": result = "c8";
+            break;
+        default: result = "q1";
+            break;
+    }
+    @(result)
+
+}
+
+
+@* 設定資料庫列表職業 *@
+@helper SetPlayerClassLang(string job)
+{
+    string result = string.Empty;
+    switch (job)
+    {
+        case "Shaman": result = "薩滿";
+            break;
+        case "Rogue": result = "盜賊";
+            break;
+        case "Paladin": result = "聖騎士";
+            break;
+        case "Warlock": result = "術士";
+            break;
+        case "Dream": result = "";
+            break;
+        case "Hunter": result = "獵人";
+            break;
+        case "Priest": result = "牧師";
+            break;
+        case "Druid": result = "德魯伊";
+            break;
+        case "Warrior": result = "戰士";
+            break;
+        case "Mage": result = "法師";
+            break;
+        default: result = "中立";
+            break;
+    }
+    @(result)
+
+}
+
+
 <div class="tabs-container">
     <ul class="tabs">
         <li>
@@ -131,12 +246,12 @@
                             </td>
                             <td style="text-align: left; border-left-style: none;">
                                 <div id="title">
-                                    <a data-id="@Model[i].id" href="http://www.hearthhead.com/card=811/cult-master" class="@CustomerHelper.SetTitleColor(Model[i].rarity) listview-cleartext">@Model[i].name</a>
+                                    <a data-id="@Model[i].id" href="http://www.hearthhead.com/card=811/cult-master" class="@SetTitleColor(Model[i].rarity) listview-cleartext">@Model[i].name</a>
                                     <div class="listview-blurb small">@Html.Raw(Model[i].text)</div>
                                 </div>
                             </td>
-                            <td class="small @CustomerHelper.SetPlayerClass(Model[i].playerClass)" style="white-space: nowrap;">
-                                <a href="/cards?filter=cl=11">@CustomerHelper.SetPlayerClassLang(Model[i].playerClass)</a>
+                            <td class="small @SetPlayerClass(Model[i].playerClass)" style="white-space: nowrap;">
+                                <a href="/cards?filter=cl=11">@SetPlayerClassLang(Model[i].playerClass)</a>
                             </td>
                             <td><span class="hearthstone-cost">@Model[i].cost</span></td>
                             <td><span class="hearthstone-health">@Model[i].health</span></td>
