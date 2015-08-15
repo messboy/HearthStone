@@ -163,7 +163,7 @@
                                 {
                                     <td align="center" valign="bottom" style="padding: 0px;">
                                         <a data-id="@Model[j].id" data-name="@Model[j].name" data-text="@Model[j].text"
-                                           href="http://www.hearthhead.com/card=811&text" data-disable-wowhead-touch-tooltip="true">
+                                           href="#" data-disable-wowhead-touch-tooltip="true">
 
                                             <img src="@Model[j].img" style="display: block; width: 120%; max-width: 200px; margin: 0px -50px;">
 
@@ -241,12 +241,12 @@
                                     <ins style="background-image: url(../../Content/Images/2015-08-08_105958.jpg);"></ins>
                                     <del></del>
                                     @* TODO Detail *@
-                                    <a data-id="@Model[i].id" href="http://www.hearthhead.com/card=811/cult-master"></a>
+                                    <a data-id="@Model[i].id" href="#"></a>
                                 </div>
                             </td>
                             <td style="text-align: left; border-left-style: none;">
                                 <div id="title">
-                                    <a data-id="@Model[i].id" href="http://www.hearthhead.com/card=811/cult-master" class="@SetTitleColor(Model[i].rarity) listview-cleartext">@Model[i].name</a>
+                                    <a data-id="@Model[i].id" href="#" class="@SetTitleColor(Model[i].rarity) listview-cleartext">@Model[i].name</a>
                                     <div class="listview-blurb small">@Html.Raw(Model[i].text)</div>
                                 </div>
                             </td>
