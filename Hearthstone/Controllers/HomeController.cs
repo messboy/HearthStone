@@ -26,6 +26,21 @@ namespace Hearthstone.Controllers
             return View();
         }
 
+        public ActionResult CardData()
+        {
+            var data = db.GetCards();
+            ViewBag.data = data;
+            return View();
+        }
+
+         [HttpPost]
+        public ActionResult CardData(FilterModel m)
+        {
+            var data = db.GetCards(m);
+            ViewBag.data = data;
+            return View();
+        }
+
 
         [HttpPost]
         public PartialViewResult GetCardDataList(FilterModel m)
@@ -43,6 +58,7 @@ namespace Hearthstone.Controllers
             return View();
         }
 
+        [NonAction]
         public ActionResult Export()
         {
             string path = HttpContext.Server.MapPath("~/App_Data/AllSets.zhTW-2.8.0.9554.json");
