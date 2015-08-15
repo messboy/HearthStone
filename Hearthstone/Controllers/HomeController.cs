@@ -13,41 +13,49 @@ namespace Hearthstone.Controllers
 {
     public class HomeController : Controller
     {
-        CardDao db = new CardDao();
+        private string _dataPath;
+        private CardDao _db;
 
+        public HomeController() {
+            _db = new CardDao();
+            _dataPath = "~/App_Data/AllSets.zhTW-2.8.0.9554.json";
+        }
+       
 
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Card()
         {
             return View();
         }
 
-        public ActionResult CardData()
-        {
+        //public ActionResult CardData()
+        //{
+        //    //存取json檔
+        //    var path = HttpContext.Server.MapPath(_dataPath);
+        //    List<Cards> data = _db.SetData(path).Where(c => c.collectible == true).Where(c => c.type != "Hero").ToList(); ;
+        //    //var data = db.GetCards();
+        //    ViewBag.data = data;
+        //    return View();
+        //}
 
-            List<Cards> data = SetData();
-            //var data = db.GetCards();
-            ViewBag.data = data.Where(c => c.collectible == true).Where(c => c.type != "Hero").ToList(); ;
-            return View();
-        }
-
-         [HttpPost]
-        public ActionResult CardData(FilterModel m)
-        {
-            var data = db.GetCards(m);
-            ViewBag.data = data;
-            return View();
-        }
+        // [HttpPost]
+        //public ActionResult CardData(FilterModel m)
+        //{
+        //    var data = _db.GetCards(m);
+        //    ViewBag.data = data;
+        //    return View();
+        //}
 
 
         [HttpPost]
         public PartialViewResult GetCardDataList(FilterModel m)
         {
-            var data = db.GetCards(m);
+            var path = HttpContext.Server.MapPath(_dataPath);
+            var data = _db.GetCardsByJson(m, path);
             ViewBag.data = data;
 
             return PartialView("_CardDataList", data);
@@ -63,66 +71,15 @@ namespace Hearthstone.Controllers
         [NonAction]
         public ActionResult Export()
         {
-            List<Cards> cardList = SetData();
+            var path = HttpContext.Server.MapPath(_dataPath);
+            List<Cards> cardList = _db.SetData(path);
 
             //儲存
-            db.AddCards(cardList);
+            _db.AddCards(cardList);
 
             return View();
         }
 
-        private List<Cards> SetData()
-        {
-            string path = HttpContext.Server.MapPath("~/App_Data/AllSets.zhTW-2.8.0.9554.json");
 
-            String jsonString = string.Empty;
-            using (StreamReader sr = new StreamReader(path))
-            {
-                jsonString = sr.ReadToEnd();
-            }
-            JObject jsonResponse = JObject.Parse(jsonString);
-
-
-            List<Cards> cardList = new List<Cards>();
-            foreach (var x in jsonResponse)
-            {
-                string set = x.Key;
-                List<CardModel> list = JsonConvert.DeserializeObject<List<CardModel>>(x.Value.ToString());
-
-                //塞到card
-                foreach (var item in list)
-                {
-                    var c = new Cards()
-                    {
-                        guid = Guid.NewGuid().ToString(),
-                        id = item.id,
-                        name = item.name,
-                        local = item.local,
-                        type = item.type,
-                        faction = item.faction,
-                        rarity = item.rarity,
-                        cost = item.cost,
-                        race = item.race,
-                        playerClass = item.playerClass,
-                        text = item.text,
-                        inPlayText = item.inPlayText,
-                        mechanics = item.mechanics != null ? string.Join(",", item.mechanics) : null,
-                        flavor = item.flavor,
-                        artist = item.artist,
-                        attack = item.attack,
-                        health = item.health,
-                        collectible = item.collectible,
-                        elite = item.elite,
-                        howToGet = item.howToGet,
-                        howToGetGold = item.howToGetGold,
-                        img = item.img,
-                        imgGold = item.imgGold,
-                        set = set
-                    };
-                    cardList.Add(c);
-                }
-            }
-            return cardList;
-        }
     }
 }

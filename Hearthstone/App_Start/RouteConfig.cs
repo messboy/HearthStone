@@ -16,7 +16,7 @@ namespace Hearthstone
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "CardData", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Card", id = UrlParameter.Optional }
             );
         }
     }
