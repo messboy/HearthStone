@@ -28,8 +28,10 @@ namespace Hearthstone.Controllers
 
         public ActionResult CardData()
         {
-            var data = db.GetCards();
-            ViewBag.data = data;
+
+            List<Cards> data = SetData();
+            //var data = db.GetCards();
+            ViewBag.data = data.Where(c => c.collectible == true).Where(c => c.type != "Hero").ToList(); ;
             return View();
         }
 
@@ -61,6 +63,16 @@ namespace Hearthstone.Controllers
         [NonAction]
         public ActionResult Export()
         {
+            List<Cards> cardList = SetData();
+
+            //儲存
+            db.AddCards(cardList);
+
+            return View();
+        }
+
+        private List<Cards> SetData()
+        {
             string path = HttpContext.Server.MapPath("~/App_Data/AllSets.zhTW-2.8.0.9554.json");
 
             String jsonString = string.Empty;
@@ -79,7 +91,7 @@ namespace Hearthstone.Controllers
 
                 //塞到card
                 foreach (var item in list)
-	            {
+                {
                     var c = new Cards()
                     {
                         guid = Guid.NewGuid().ToString(),
@@ -94,7 +106,7 @@ namespace Hearthstone.Controllers
                         playerClass = item.playerClass,
                         text = item.text,
                         inPlayText = item.inPlayText,
-                        mechanics = item.mechanics != null ? string.Join(",", item.mechanics): null,
+                        mechanics = item.mechanics != null ? string.Join(",", item.mechanics) : null,
                         flavor = item.flavor,
                         artist = item.artist,
                         attack = item.attack,
@@ -108,13 +120,9 @@ namespace Hearthstone.Controllers
                         set = set
                     };
                     cardList.Add(c);
-	            }
+                }
             }
-
-            //儲存
-            db.AddCards(cardList);
-
-            return View();
+            return cardList;
         }
     }
 }
